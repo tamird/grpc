@@ -16,6 +16,8 @@
 Contains build targets used by Starlark files in the bazel/ directory.
 """
 
+load("@rules_cc//cc:cc_binary.bzl", "cc_binary")
+
 licenses(["notice"])
 
 package(
@@ -24,6 +26,11 @@ package(
         "layering_check",
         "parse_headers",
     ],
+)
+
+cc_binary(
+    name = "copy_file",
+    srcs = ["copy_file.cc"],
 )
 
 filegroup(
