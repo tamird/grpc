@@ -1399,43 +1399,43 @@ _BUILD_EXTRA_METADATA = {
         "build": "protoc",
         "_RENAME": "grpc_plugin_support",
     },
-    "src/compiler:grpc_cpp_plugin": {
+    "src/compiler:grpc_cpp_plugin_native": {
         "language": "c++",
         "build": "protoc",
         "_TYPE": "target",
         "_RENAME": "grpc_cpp_plugin",
     },
-    "src/compiler:grpc_csharp_plugin": {
+    "src/compiler:grpc_csharp_plugin_native": {
         "language": "c++",
         "build": "protoc",
         "_TYPE": "target",
         "_RENAME": "grpc_csharp_plugin",
     },
-    "src/compiler:grpc_node_plugin": {
+    "src/compiler:grpc_node_plugin_native": {
         "language": "c++",
         "build": "protoc",
         "_TYPE": "target",
         "_RENAME": "grpc_node_plugin",
     },
-    "src/compiler:grpc_objective_c_plugin": {
+    "src/compiler:grpc_objective_c_plugin_native": {
         "language": "c++",
         "build": "protoc",
         "_TYPE": "target",
         "_RENAME": "grpc_objective_c_plugin",
     },
-    "src/compiler:grpc_php_plugin": {
+    "src/compiler:grpc_php_plugin_native": {
         "language": "c++",
         "build": "protoc",
         "_TYPE": "target",
         "_RENAME": "grpc_php_plugin",
     },
-    "src/compiler:grpc_python_plugin": {
+    "src/compiler:grpc_python_plugin_native": {
         "language": "c++",
         "build": "protoc",
         "_TYPE": "target",
         "_RENAME": "grpc_python_plugin",
     },
-    "src/compiler:grpc_ruby_plugin": {
+    "src/compiler:grpc_ruby_plugin_native": {
         "language": "c++",
         "build": "protoc",
         "_TYPE": "target",
