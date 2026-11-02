@@ -201,6 +201,26 @@ def grpc_cc_library(
         linkstatic = linkstatic,
     )
 
+def _plugin_binary_impl(ctx):
+    ctx.actions.run(
+        executable = ctx.attr._copy[DefaultInfo].files_to_run,
+        arguments = [ctx.file.src.path, ctx.outputs.out.path],
+        inputs = [ctx.file.src],
+        outputs = [ctx.outputs.out],
+        mnemonic = "CopyGrpcPlugin",
+    )
+    return [DefaultInfo(executable = ctx.outputs.out)]
+
+_plugin_binary = rule(
+    implementation = _plugin_binary_impl,
+    executable = True,
+    attrs = {
+        "src": attr.label(allow_single_file = True, mandatory = True),
+        "out": attr.output(mandatory = True),
+        "_copy": attr.label(default = Label("//bazel:copy_file"), executable = True, cfg = "exec"),
+    },
+)
+
 def grpc_proto_plugin(name, srcs = [], deps = []):
     cc_binary(
         name = name + "_native",
@@ -212,16 +232,13 @@ def grpc_proto_plugin(name, srcs = [], deps = []):
         binary = name + "_native",
     )
 
-    # In order to avoid warnings from Bazel, names of the rule and its output file must differ.
-    native.genrule(
+    _plugin_binary(
         name = name,
-        srcs = select({
-            "@platforms//os:macos": [name + "_universal"],
-            "//conditions:default": [name + "_native"],
+        src = select({
+            "@platforms//os:macos": name + "_universal",
+            "//conditions:default": name + "_native",
         }),
-        outs = [name + "_binary"],
-        cmd = "cp $< $@",
-        executable = True,
+        out = name + "_binary",
     )
 
 def grpc_internal_proto_library(
